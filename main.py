@@ -2,13 +2,13 @@ import itertools
 
 def getAlRoutes(listOfKnots: list[str])-> list[tuple[str, ...]]:
     """
-    各ノットの巡回順を全通り生成する
+    Generate all possible routes through the knots
     """
     return list(itertools.permutations(listOfKnots))
 
 def initMapEdegeToDistance()-> dict[str, dict[str, float]]:
     """
-    各エッジの距離を初期化する
+    Initialize distances for each edge
     """
     mapEdgeToDistance = {
         "F1": {},
@@ -47,10 +47,10 @@ def initMapEdegeToDistance()-> dict[str, dict[str, float]]:
 
 def calcSumDistance(route: tuple[str, ...], mapEdgeToDistance: dict[str, dict[str, float]]) -> float:
     """
-    ルートの距離を計算する
+    Calculate the total distance of a route
     """
     sumDistance = 0.0
-    # F1から最初のノットへの距離を加算
+    # Add distance from F1 to the first knot
     sumDistance += mapEdgeToDistance["F1"][route[0]]
     for i in range(len(route) - 1):
         sumDistance += mapEdgeToDistance[route[i]][route[i + 1]]
@@ -58,15 +58,15 @@ def calcSumDistance(route: tuple[str, ...], mapEdgeToDistance: dict[str, dict[st
 
 
 if __name__ == "__main__":
-    mapEdgeToDistance = initMapEdegeToDistance()
+    mapEdgeToDistance: dict[str, dict[str, float]] = initMapEdegeToDistance()
 
-    listOfKnots = ["a", "b", "c", "d"]
-    listOfRoutes = getAlRoutes(listOfKnots)
+    listOfKnots: list[str] = ["a", "b", "c", "d"]
+    listOfRoutes: list[tuple[str, ...]] = getAlRoutes(listOfKnots)
 
-    minRoute = None
-    distanceOfMinRoute = float("inf")
+    minRoute: tuple[str, ...] = ()
+    distanceOfMinRoute: float = float("inf")
     for route in listOfRoutes:
-        sumDistance = calcSumDistance(route, mapEdgeToDistance)
+        sumDistance: float = calcSumDistance(route, mapEdgeToDistance)
         if sumDistance < distanceOfMinRoute:
             minRoute = route
             distanceOfMinRoute = sumDistance
