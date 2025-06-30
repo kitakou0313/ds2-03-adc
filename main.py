@@ -73,8 +73,3 @@ if __name__ == "__main__":
 
 
     print("Ans is {}".format(minRoute))
-
-
-
-
-
